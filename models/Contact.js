@@ -1,9 +1,17 @@
 const mongoose = require("mongoose");
 
-const ContactSchema = new mongoose.Schema(
+const contactSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, required: true },
+
+    email: {
+      type: String,
+      required: true,
+      unique: true, // 🔒 Only one email allowed
+      lowercase: true,
+      trim: true,
+    },
+
     contact: { type: String, required: true },
     subject: { type: String, required: true },
     message: { type: String, required: true },
@@ -11,4 +19,4 @@ const ContactSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Contact", ContactSchema);
+module.exports = mongoose.model("Contact", contactSchema);
